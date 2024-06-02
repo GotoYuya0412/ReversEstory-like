@@ -43,7 +43,7 @@ public class move3 : MonoBehaviour
                 force.y = -forceLimit;
             }
 
-            rb.velocity = new Vector2(0, 0);
+            //rb.velocity = new Vector2(0, 0);
             rb.velocity = force;
             force = new Vector2(0, 0);
 

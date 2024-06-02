@@ -8,8 +8,7 @@ public class move3 : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 mousePosition;
-    [SerializeField] float currentPower = 5f;
-    Vector2 a = new Vector2(3 , 3);
+    [SerializeField] float forceLimit = 30f;
 
     private void Start()
     {
@@ -22,7 +21,36 @@ public class move3 : MonoBehaviour
             Vector2 screen_point = Input.mousePosition;
             this.mousePosition = Camera.main.ScreenToWorldPoint(screen_point);
             Vector2 playerPosition = this.transform.position;
-            Vector2 force = this.mousePosition - playerPosition;
+            Vector2 force = (this.mousePosition - playerPosition) * 2;
+
+            if(force.x > forceLimit)
+            {
+                force.x = forceLimit;
+            }
+
+            if (force.y > forceLimit)
+            {
+                force.y = forceLimit;
+            }
+
+            if (force.x < -forceLimit)
+            {
+                force.x = -forceLimit;
+            }
+
+            if (force.y < -forceLimit)
+            {
+                force.y = -forceLimit;
+            }
+
+            rb.velocity = new Vector2(0, 0);
+            rb.velocity = force;
+            force = new Vector2(0, 0);
+
+            Debug.Log(mousePosition);
+            Debug.Log(playerPosition);
+            //Debug.Log(mousePosition.normalized);
+            //Debug.Log(playerPosition.normalized);
 
             //if (-5 < force.x && force.x < 5 && -5 < force.y && force.y < 5)
             //{
@@ -76,21 +104,16 @@ public class move3 : MonoBehaviour
             //        force.y = force.y * 4f;
             //        return;
             //    }
-          
+
             //}
 
 
 
-                //Vector2 force = (this.mousePosition - playerPosition) * currentPower;
-                rb.velocity = new Vector2(0,0);
-            rb.velocity = force;
-            force = new Vector2(0,0);
+            //Vector2 force = (this.mousePosition - playerPosition) * currentPower;
 
 
-            Debug.Log(mousePosition);
-            Debug.Log(playerPosition);
-            Debug.Log(mousePosition.normalized);
-            Debug.Log(playerPosition.normalized);
+
+
         }
     }
 }

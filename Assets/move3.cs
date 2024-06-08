@@ -47,8 +47,10 @@ public class move3 : MonoBehaviour
             rb.velocity = force;
             force = new Vector2(0, 0);
 
-            Debug.Log(mousePosition);
-            Debug.Log(playerPosition);
+            //Debug.Log(mousePosition);
+            //Debug.Log(playerPosition);
+
+
             //Debug.Log(mousePosition.normalized);
             //Debug.Log(playerPosition.normalized);
 

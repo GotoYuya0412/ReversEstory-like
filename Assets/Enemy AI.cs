@@ -6,7 +6,10 @@ using UnityEngine.UIElements;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField]GameObject player;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject EnemyBulet;
+    float time = 0;
+    [SerializeField] float cool;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time -= Time.deltaTime;
         //LayerMask layerMask = 1 << LayerMask.NameToLayer("Player");
         //Vector2 temp = player.transform.position - transform.position;
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, temp,100f,layerMask);
@@ -35,14 +39,15 @@ public class EnemyAI : MonoBehaviour
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, temp, 100f, layerMask);
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, temp, 100f);
-        Debug.Log(hit.collider.gameObject.name);
+        //Debug.Log(hit.collider.gameObject.name);
 
         if (hit)
         {
-            if (hit.collider.gameObject.tag == "Player")
+            if (hit.collider.gameObject.tag == "Player" && time <= 0)
             {
-
                 Debug.Log("1");
+                Instantiate(EnemyBulet, transform.position, Quaternion.identity);
+                time = cool;
             }
 
         }

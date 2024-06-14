@@ -30,11 +30,10 @@ public class Shoot : MonoBehaviour
         if(buleta != null && Input.GetMouseButton(1))
         {
              buleta.transform.position = this.transform.position;
-        Vector2 a = cursol.transform.position - transform.position;
-        float rad = Mathf.Atan2(a.y, a.x);
-        float degree = (rad * Mathf.Rad2Deg) - 90f;
-        buleta.transform.eulerAngles = new Vector3(0, 0, degree);
-        Debug.Log(degree);
+             Vector2 a = cursol.transform.position - transform.position;
+             float rad = Mathf.Atan2(a.y, a.x);
+             float degree = (rad * Mathf.Rad2Deg) - 90f;
+             buleta.transform.eulerAngles = new Vector3(0, 0, degree);
         }
 
         //Vector3 a = this.transform.position;

@@ -16,10 +16,10 @@ public class Bulet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(1))
-        {
-            b = false;
-        }
+        //if(Input.GetMouseButton(1))
+        //{
+        //    b = false;
+        //}
 
         if (Input.GetMouseButtonUp(1))
         {

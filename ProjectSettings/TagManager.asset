@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bulet
   - Enemy
+  - Transform1
+  - Transform2
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Bullet
   - 
   - 
   - 

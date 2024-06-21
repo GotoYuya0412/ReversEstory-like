@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject EnemyBulet;
     float time = 0;
     [SerializeField] float cool;
+    RaycastHit2D hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,23 +31,16 @@ public class EnemyAI : MonoBehaviour
         //{
         //    Debug.Log("1");
         //}
-    }
-
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        //Debug.Log("1");
         LayerMask layerMask = 1 << LayerMask.NameToLayer("Player");
         Vector2 temp = player.transform.position - transform.position;
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, temp, 100f, layerMask);
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, temp, 100f);
-        //Debug.Log(hit.collider.gameObject.name);
+        hit = Physics2D.Raycast(transform.position, temp, 100f);
+        Debug.DrawRay(transform.position, temp);
 
         if (hit)
         {
             if (hit.collider.gameObject.tag == "Player" && time <= 0)
             {
-                Debug.Log("1");
                 Instantiate(EnemyBulet, transform.position, Quaternion.identity);
                 time = cool;
             }

@@ -4,9 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HP : MonoBehaviour
+public class BossHP : MonoBehaviour
 {
     [SerializeField] float hp = 20f;
+    [SerializeField] float maxhp = 20;
     [SerializeField] float Yellow = 10f;
     [SerializeField] float orange1 = 20f;
     [SerializeField] float red1 = 30f;
@@ -17,13 +18,23 @@ public class HP : MonoBehaviour
     bool red = false;
     public GameObject text;
     Text damege;
-    public Canvas canvas;
+    public Canvas canvasdamege;
     GameObject text1;
+    public Slider slider;
+    float sliderx = 6.5f;
+    float sliderscale;
+    float canvasscale = 520;
+    float hpscale;
+    float slidertrp;
+    RectTransform rect;
 
     // Start is called before the first frame update
     void Start()
     {
         damege = text.GetComponent<Text>();
+        sliderscale = 6.5f / hp;
+
+        rect = slider.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -50,7 +61,24 @@ public class HP : MonoBehaviour
         {
             red = true;
         }
-        
+
+        sliderx = hp * sliderscale;
+        if (sliderx < 0)
+        {
+            sliderx = 0;
+        }
+
+        hpscale = hp / maxhp;
+        slidertrp = canvasscale - canvasscale * hpscale;
+        slider.transform.localScale = new Vector3(sliderx, 4, 1);
+        rect.anchoredPosition = new Vector3(-40, slidertrp, 0);
+
+        Debug.Log(slidertrp);
+
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject, 0.3f);
+        }
     }
 
 
@@ -79,38 +107,27 @@ public class HP : MonoBehaviour
             Vector2 posi = new Vector2(0.3f, 0.3f);
             Vector2 posi1 = transform.position;
             Vector2 damegeposi = posi + posi1;
-            Instantiate(text, damegeposi, Quaternion.identity, canvas.transform);
+            Instantiate(text, damegeposi, Quaternion.identity, canvasdamege.transform);
 
             //Destroy(collision.gameObject);
             orange = false;
             red = false;
         }
 
-        if (hp <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-
-        Debug.Log(hp);
+        //Debug.Log(hp);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Circle")
+        if (collision.gameObject.tag == "Circle")
         {
             hp -= circle;
             Destroy(collision.gameObject);
 
-        Vector2 posi = new Vector2(0.3f, 0.3f);
-        Vector2 posi1 = transform.position;
-        Vector2 damegeposi = posi + posi1;
-        damege.text = "" + circle;
-        Instantiate(text, damegeposi, Quaternion.identity, canvas.transform);
-        }
-
-
-        if(hp <= 0)
-        {
-            Destroy(this.gameObject);
+            Vector2 posi = new Vector2(0.3f, 0.3f);
+            Vector2 posi1 = transform.position;
+            Vector2 damegeposi = posi + posi1;
+            damege.text = "" + circle;
+            Instantiate(text, damegeposi, Quaternion.identity, canvasdamege.transform);
         }
 
         //Debug.Log(hp);

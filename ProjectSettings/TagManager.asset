@@ -9,6 +9,8 @@ TagManager:
   - Transform1
   - Transform2
   - Circle
+  - EnemyBulet
+  - Transform3
   layers:
   - Default
   - TransparentFX

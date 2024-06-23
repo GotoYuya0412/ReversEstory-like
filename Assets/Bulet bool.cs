@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Buletbool : MonoBehaviour
 {
+    [SerializeField] AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioSource.PlayClipAtPoint(clip, transform.position);
     }
 
     // Update is called once per frame
@@ -20,5 +21,4 @@ public class Buletbool : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
 }

@@ -14,6 +14,7 @@ public class EnemyBulet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
+        Destroy(gameObject, 10f);
     }
 
     // Update is called once per frame
@@ -26,11 +27,14 @@ public class EnemyBulet : MonoBehaviour
             rb.velocity = b;
             aa = false;
         }
- 
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+
         Destroy(gameObject);
+        }
     }
 }

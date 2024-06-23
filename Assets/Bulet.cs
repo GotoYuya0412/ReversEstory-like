@@ -14,7 +14,8 @@ public class Bulet : MonoBehaviour
     public Color orenge;
     public Color red;
     SpriteRenderer sp;
-
+    AudioSource audio1;
+    bool b_audio = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class Bulet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cursol = GameObject.Find("Cursol");
         player = GameObject.Find("Player");
-
+        audio1 = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,6 +47,12 @@ public class Bulet : MonoBehaviour
             rb.velocity = this.transform.up * a;
             b = true;
             kore = false;
+
+            if (b_audio)
+            {
+                audio1.Play();
+                b_audio = false;
+            }
 
             Destroy(gameObject, 10);
         }

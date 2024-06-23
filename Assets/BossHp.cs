@@ -73,7 +73,7 @@ public class BossHP : MonoBehaviour
         slider.transform.localScale = new Vector3(sliderx, 4, 1);
         rect.anchoredPosition = new Vector3(-40, slidertrp, 0);
 
-        Debug.Log(slidertrp);
+        //Debug.Log(slidertrp);
 
         if (hp <= 0)
         {

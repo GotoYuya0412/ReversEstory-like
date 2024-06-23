@@ -69,14 +69,16 @@ public class Shoot : MonoBehaviour
                     {
                     t = Vector2.Distance(transform.position, near.transform.position);
 
+
+                        if (distans > t)
+                        {
+                            distans = t;
+                            nearenemy = near;
+
+                        }
                     }
                     
-                    if (distans > t)
-                    {
-                        distans = t;
-                        nearenemy = near;
-
-                    }
+ 
                 }
 
 
@@ -84,8 +86,13 @@ public class Shoot : MonoBehaviour
                 {
                     GameObject bulet22 = Instantiate(bulet2, transform.position, Quaternion.identity);
                     bulet2rb = bulet22.GetComponent<Rigidbody2D>();
+
+                    if (nearenemy != null)
+                    {
+
                     Vector2 v = (nearenemy.transform.position - transform.position).normalized * 30;
                     bulet2rb.velocity = v;
+                    }
 
                     distans = s;
 

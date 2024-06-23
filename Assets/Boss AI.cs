@@ -42,6 +42,8 @@ public class BossAI : MonoBehaviour
     bool b_audio = true;
     AudioSource audio1;
 
+    BossHP bosshp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,15 +57,20 @@ public class BossAI : MonoBehaviour
         i = 3;
         siRandom();
         audio1 = GetComponent<AudioSource>();
+        bosshp = GetComponent<BossHP>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if (time > 2f)
+        if (bosshp.hp > 0f)
         {
-        ai[i]();
+
+           time += Time.deltaTime;
+          if (time > 2f)
+           {
+              ai[i]();
+           }
         }
     }
     void Move1()
@@ -106,20 +113,23 @@ public class BossAI : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Transform1" && !move3)
+        if (bosshp.hp > 0f)
         {
-            shootai[si]();
-        }
 
-        if(collision.gameObject.tag == "Transform2" && !move3)
-        {
-            //Shoot2();
-            shootai[si]();
-        }
+            if (collision.gameObject.tag == "Transform1" && !move3)
+            {
+                shootai[si]();
+            }
 
-        if (collision.gameObject.tag == "Transform3" && !move3)
-        {
-            shootai[si]();
+            if(collision.gameObject.tag == "Transform2" && !move3)
+            {
+                shootai[si]();
+            }
+
+            if (collision.gameObject.tag == "Transform3" && !move3)
+            {
+                shootai[si]();
+            }
         }
     }
 
@@ -136,7 +146,6 @@ public class BossAI : MonoBehaviour
 
         if(shootcount == 30)
         {
-            //i = Random.Range(0, ai.Length);
             shootcount = 0;
             cooltime = 0;
             iRandom();

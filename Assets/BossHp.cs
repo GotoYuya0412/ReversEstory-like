@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BossHP : MonoBehaviour
 {
-    [SerializeField] float hp = 20f;
+    [SerializeField] public float hp = 20f;
     [SerializeField] float maxhp = 20;
     [SerializeField] float Yellow = 10f;
     [SerializeField] float orange1 = 20f;
@@ -27,6 +27,13 @@ public class BossHP : MonoBehaviour
     float hpscale;
     float slidertrp;
     RectTransform rect;
+    [SerializeField] GameObject haretu;
+    [SerializeField] GameObject particle;
+    public float timerb = 0f;
+    bool b_haretu = true;
+    bool b_particle = true;
+    GameObject haretu2;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +42,7 @@ public class BossHP : MonoBehaviour
         sliderscale = 6.5f / hp;
 
         rect = slider.GetComponent<RectTransform>();
+
     }
 
     // Update is called once per frame
@@ -77,7 +85,20 @@ public class BossHP : MonoBehaviour
 
         if (hp <= 0)
         {
-            Destroy(this.gameObject, 0.3f);
+            timerb += Time.deltaTime;
+
+            if (timerb > 0.5f && b_haretu)
+            {
+                haretu2 =  Instantiate(haretu, transform.position, Quaternion.identity);
+                b_haretu = false;
+            }
+            if (timerb > 3f && b_particle)
+            {
+                Instantiate(particle, transform.position, Quaternion.identity);
+                b_particle = false;
+                Destroy(haretu2);
+                Destroy(this.gameObject);
+            }
         }
     }
 

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoad : MonoBehaviour
 {
     float time = 0f;
+    bool playerfalse = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,12 @@ public class SceneLoad : MonoBehaviour
         if (time > 0.5f)
         {
             GetComponent<AudioSource>().Play();
-            GameObject.Find("Player").SetActive(false);
+
+            if (playerfalse)
+            {
+                GameObject.Find("Player").SetActive(false);
+                playerfalse = false;
+            }
             Invoke("LoadMain", 1f);
         }
     }

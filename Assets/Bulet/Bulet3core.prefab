@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9194340088895671453}
   m_Layer: 8
   m_Name: Bulet3core
-  m_TagString: EnemyBulet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 122304239622975015}
   m_Layer: 8
   m_Name: Capsule
-  m_TagString: EnemyBulet
+  m_TagString: EnemyBulet2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

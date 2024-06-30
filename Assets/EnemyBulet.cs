@@ -20,12 +20,16 @@ public class EnemyBulet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player != null)
+        {
+
         if(aa)
         {
             a = player.transform.position - transform.position;
             Vector2 b = a.normalized * speed;
             rb.velocity = b;
             aa = false;
+        }
         }
     }
 

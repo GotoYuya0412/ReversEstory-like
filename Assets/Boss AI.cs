@@ -248,7 +248,6 @@ public class BossAI : MonoBehaviour
         if (cooltime > 5f)
         {
             iRandom();
-            //i = Random.Range(0, ai.Length);
             cooltime = 0f;
             line = true;
             beam = true;

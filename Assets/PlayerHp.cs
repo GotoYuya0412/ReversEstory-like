@@ -7,12 +7,18 @@ public class PlayerHp : MonoBehaviour
 {
     public GameObject[] heart;
     [SerializeField] GameObject panelGameOver;
-    int hp = 7;
+    int hp = 14;
     GameObject boss;
     BossHP bosshp;
     [SerializeField] GameObject panelclear;
     float timer = 0f;
     bool nullche = false;
+    float interbal = 0f;
+    [SerializeField] GameObject particleDamege;
+    [SerializeField] GameObject particleDess;
+    AudioSource audioSource;
+    [SerializeField] GameObject audioDess;
+
     
 
     // Start is called before the first frame update
@@ -21,6 +27,7 @@ public class PlayerHp : MonoBehaviour
         panelGameOver.SetActive(false);
         panelclear.SetActive(false);
         boss = GameObject.Find("Boss");
+        audioSource = GetComponent<AudioSource>();
 
         if (boss != null)
         {
@@ -44,6 +51,18 @@ public class PlayerHp : MonoBehaviour
                 }
             }
         }
+
+        if (hp <= 0)
+        {
+            panelGameOver.SetActive(true);
+            Instantiate(particleDess, transform.position, Quaternion.identity);
+            Instantiate(audioDess, transform.position, Quaternion.identity);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            gameObject.GetComponent<move3>().enabled = false;
+            gameObject.GetComponent<Shoot>().enabled = false;
+            gameObject.GetComponent<PlayerHp>().enabled = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,11 +73,39 @@ public class PlayerHp : MonoBehaviour
             {
                 hp--;
                 heart[hp].SetActive(false);
+                Instantiate(particleDamege, transform.position, Quaternion.identity);
+                audioSource.Play();
             }
 
-            if (hp <= 0)
+            
+        }
+        if (collision.gameObject.tag == "EnemyBulet2")
+        {
+            if (hp > 0)
             {
-                panelGameOver.SetActive(true);
+                hp--;
+                heart[hp].SetActive(false);
+                hp--;
+                heart[hp].SetActive(false);
+                Instantiate(particleDamege, transform.position, Quaternion.identity);
+                audioSource.Play();
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        interbal -= Time.deltaTime;
+
+        if (collision.gameObject.tag == "EnemyBuletStay" && interbal <= 0f)
+        {
+            if (hp > 0)
+            {
+                hp--;
+                heart[hp].SetActive(false);
+                interbal = 0.1f;
+                Instantiate(particleDamege, transform.position, Quaternion.identity);
+                audioSource.Play();
             }
         }
     }

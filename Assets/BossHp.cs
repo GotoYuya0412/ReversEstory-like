@@ -33,6 +33,10 @@ public class BossHP : MonoBehaviour
     bool b_haretu = true;
     bool b_particle = true;
     GameObject haretu2;
+    [SerializeField] AudioClip clip1;
+    [SerializeField] AudioClip clip2;
+    [SerializeField] GameObject audioBen;
+    [SerializeField] GameObject audioBom;
 
 
     // Start is called before the first frame update
@@ -42,6 +46,7 @@ public class BossHP : MonoBehaviour
         sliderscale = 6.5f / hp;
 
         rect = slider.GetComponent<RectTransform>();
+        AudioSource.PlayClipAtPoint(clip2, transform.position, 10f);
 
     }
 
@@ -81,7 +86,6 @@ public class BossHP : MonoBehaviour
         slider.transform.localScale = new Vector3(sliderx, 4, 1);
         rect.anchoredPosition = new Vector3(-40, slidertrp, 0);
 
-        //Debug.Log(slidertrp);
 
         if (hp <= 0)
         {
@@ -91,11 +95,17 @@ public class BossHP : MonoBehaviour
             {
                 haretu2 =  Instantiate(haretu, transform.position, Quaternion.identity);
                 b_haretu = false;
+                Ben();
+                Invoke("Ben", 1f);
+                Invoke("Ben", 1.5f);
+                Invoke("Ben", 2f);
+                Invoke("Ben", 2.5f);
             }
             if (timerb > 3f && b_particle)
             {
                 Instantiate(particle, transform.position, Quaternion.identity);
                 b_particle = false;
+                Instantiate(audioBom, transform.position, Quaternion.identity);
                 Destroy(haretu2);
                 Destroy(this.gameObject);
             }
@@ -152,5 +162,10 @@ public class BossHP : MonoBehaviour
         }
 
         //Debug.Log(hp);
+    }
+
+    void Ben()
+    {
+        Instantiate(audioBen, transform.position, Quaternion.identity);
     }
 }

@@ -11,6 +11,8 @@ TagManager:
   - Circle
   - EnemyBulet
   - Transform3
+  - EnemyBulet2
+  - EnemyBuletStay
   layers:
   - Default
   - TransparentFX
